@@ -1,0 +1,21 @@
+#include <BluetoothSerial.h>
+BluetoothSerial SerialBT;
+const int ledPin = LED_BUILTIN;
+
+void setup() {
+  SerialBT.begin("....."); // Nama perangkat Bluetooth
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  if (SerialBT.available()) {
+    char command = SerialBT.read();
+    if (command == '1') {
+      digitalWrite(ledPin, HIGH);// Nyalakan LED
+      Serial.print("LED ON");
+    } else if (command == '0') {
+      digitalWrite(ledPin, LOW);// Matikan LED
+      Serial.print("LED OFF");      
+    }
+  }
+}
